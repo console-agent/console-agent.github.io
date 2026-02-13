@@ -41,6 +41,11 @@
           <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg>
         </a>
         <a href="https://www.npmjs.com/package/@console-agent/agent" target="_blank" class="nav-npm">npm</a>
+        <a href="https://pypi.org/project/console-agent/" target="_blank" class="nav-pypi">PyPI</a>
+        <div class="lang-toggle">
+          <button class="lang-toggle-btn active" data-lang="js" title="Node.js / TypeScript">JS</button>
+          <button class="lang-toggle-btn" data-lang="python" title="Python">PY</button>
+        </div>
       </div>
       <button class="nav-mobile-toggle" aria-label="Menu">☰</button>
     </div>
@@ -50,7 +55,7 @@
   <section id="hero">
     <div class="hero-bg"></div>
     <div class="hero-content">
-      <div class="hero-badge">v1.0 — Powered by Google Gemini</div>
+      <div class="hero-badge">v1.1 — Powered by Google Gemini</div>
       <h1 class="hero-title">
         The <span class="accent">jQuery</span> of<br>AI Agents
       </h1>
@@ -130,8 +135,8 @@
       <h2 class="section-title">See the <span class="accent">Difference</span></h2>
       <p class="section-desc">From guesswork to answers. One line changes everything.</p>
       <div class="ba-grid">
-        <!-- BEFORE -->
-        <div class="ba-card ba-before" data-anim="slide-right">
+        <!-- BEFORE — JS -->
+        <div class="ba-card ba-before lang-js" data-anim="slide-right">
           <div class="ba-label ba-label-before">❌ Before — console.log hell</div>
           <div class="terminal terminal-sm">
             <div class="terminal-header">
@@ -153,8 +158,31 @@
           </div>
           <div class="ba-verdict ba-verdict-before">⏱️ 45 min of guesswork. No confidence.</div>
         </div>
-        <!-- AFTER -->
-        <div class="ba-card ba-after" data-anim="slide-left">
+        <!-- BEFORE — Python -->
+        <div class="ba-card ba-before lang-py" data-anim="slide-right">
+          <div class="ba-label ba-label-before">❌ Before — print() debugging hell</div>
+          <div class="terminal terminal-sm">
+            <div class="terminal-header">
+              <span class="terminal-dot red"></span>
+              <span class="terminal-dot yellow"></span>
+              <span class="terminal-dot green"></span>
+              <span class="terminal-title">your_app.py</span>
+            </div>
+            <div class="terminal-body ba-body">
+              <div class="ba-line ba-dim">print("error here:", err)</div>
+              <div class="ba-line ba-dim">print("data:", json.dumps(data))</div>
+              <div class="ba-line ba-dim">print("hmm", type(result))</div>
+              <div class="ba-line ba-dim">print("WHY IS THIS NONE???")</div>
+              <div class="ba-line ba-dim">print("trying fix #47...")</div>
+              <div class="ba-line ba-dim">print(getattr(data, 'users', None))</div>
+              <div class="ba-line ba-dim"># 45 minutes later...</div>
+              <div class="ba-line ba-dim">print("FOUND IT maybe?")</div>
+            </div>
+          </div>
+          <div class="ba-verdict ba-verdict-before">⏱️ 45 min of guesswork. No confidence.</div>
+        </div>
+        <!-- AFTER — JS -->
+        <div class="ba-card ba-after lang-js" data-anim="slide-left">
           <div class="ba-label ba-label-after">✅ After — console.agent</div>
           <div class="terminal terminal-sm">
             <div class="terminal-header">
@@ -171,6 +199,30 @@
               <div class="ba-line"><span class="t-gray">[AGENT]</span> └─ <span class="t-green">✓ ROOT CAUSE IDENTIFIED</span></div>
               <div class="ba-line ba-spacer"></div>
               <div class="ba-line"><span class="t-dim">Likely cause:</span> <span class="t-white">Missing await on async fn</span></div>
+              <div class="ba-line"><span class="t-dim">Suggested fix:</span> <span class="t-white">Add 'await' on line 47</span></div>
+              <div class="ba-line"><span class="t-green">Confidence: 0.92</span> <span class="t-dim">| 312ms | 189 tokens</span></div>
+            </div>
+          </div>
+          <div class="ba-verdict ba-verdict-after">⚡ 1 line. 312ms. Root cause + fix.</div>
+        </div>
+        <!-- AFTER — Python -->
+        <div class="ba-card ba-after lang-py" data-anim="slide-left">
+          <div class="ba-label ba-label-after">✅ After — agent()</div>
+          <div class="terminal terminal-sm">
+            <div class="terminal-header">
+              <span class="terminal-dot red"></span>
+              <span class="terminal-dot yellow"></span>
+              <span class="terminal-dot green"></span>
+              <span class="terminal-title">your_app.py</span>
+            </div>
+            <div class="terminal-body ba-body">
+              <div class="ba-line"><span class="t-cyan">agent.debug</span>(<span class="t-string">"why is this None?"</span>, context=err)</div>
+              <div class="ba-line ba-spacer"></div>
+              <div class="ba-line"><span class="t-gray">[AGENT]</span> 🐛 <span class="t-bold">Analyzing error...</span></div>
+              <div class="ba-line"><span class="t-gray">[AGENT]</span> ├─ <span class="t-dim">Tool:</span> <span class="t-cyan">code_execution</span> → Tested fix</div>
+              <div class="ba-line"><span class="t-gray">[AGENT]</span> └─ <span class="t-green">✓ ROOT CAUSE IDENTIFIED</span></div>
+              <div class="ba-line ba-spacer"></div>
+              <div class="ba-line"><span class="t-dim">Likely cause:</span> <span class="t-white">Missing 'await' on async fn</span></div>
               <div class="ba-line"><span class="t-dim">Suggested fix:</span> <span class="t-white">Add 'await' on line 47</span></div>
               <div class="ba-line"><span class="t-green">Confidence: 0.92</span> <span class="t-dim">| 312ms | 189 tokens</span></div>
             </div>
@@ -582,6 +634,7 @@ info.data.name; // "John Doe" ✅</code></pre>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-typescript.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-bash.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-python.min.js"></script>
 
   <script src="script.js"></script>
 </body>

@@ -31,6 +31,42 @@ a:hover { opacity: 0.8; }
 .nav-links a:hover { color: #fff; opacity: 1; }
 .nav-github, .nav-npm { display: flex; align-items: center; }
 .nav-npm { background: #cb3837; color: #fff !important; padding: 4px 10px; border-radius: 4px; font-weight: 600; font-size: 0.8rem; }
+.nav-pypi { background: #3775A9; color: #fff !important; padding: 4px 10px; border-radius: 4px; font-weight: 600; font-size: 0.8rem; display: none; }
+body.lang-python .nav-npm { display: none; }
+body.lang-python .nav-pypi { display: flex; }
+body.lang-python .nav-github svg + span { display: none; }
+
+/* ─── Language Toggle ──────────────────────────────────── */
+.lang-toggle {
+  display: flex; align-items: center; gap: 0;
+  background: rgba(255,255,255,0.06); border-radius: 6px;
+  border: 1px solid rgba(255,255,255,0.1); overflow: hidden;
+}
+.lang-toggle-btn {
+  padding: 5px 14px; font-size: 0.8rem; font-weight: 600;
+  background: none; border: none; color: #666; cursor: pointer;
+  transition: all 0.2s; font-family: 'Inter', sans-serif;
+  display: flex; align-items: center; gap: 6px;
+}
+.lang-toggle-btn.active { background: rgba(0,229,160,0.15); color: #00e5a0; }
+.lang-toggle-btn:hover:not(.active) { color: #aaa; }
+.lang-toggle-btn svg { width: 14px; height: 14px; }
+
+/* Language-specific content */
+.lang-js { display: block; }
+.lang-py { display: none; }
+body.lang-python .lang-js { display: none; }
+body.lang-python .lang-py { display: block; }
+/* for inline spans */
+span.lang-js { display: inline; }
+span.lang-py { display: none; }
+body.lang-python span.lang-js { display: none; }
+body.lang-python span.lang-py { display: inline; }
+/* for flex containers */
+div.lang-js.flex-item { display: flex; }
+div.lang-py.flex-item { display: none; }
+body.lang-python div.lang-js.flex-item { display: none; }
+body.lang-python div.lang-py.flex-item { display: flex; }
 .nav-mobile-toggle { display: none; background: none; border: none; color: #fff; font-size: 1.5rem; cursor: pointer; }
 
 /* ─── Hero ─────────────────────────────────────────────── */
