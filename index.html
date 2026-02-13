@@ -1,0 +1,491 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>console.agent — The jQuery of AI Agents</title>
+  <meta name="description" content="Drop console.agent(...) anywhere in your code to execute agentic workflows — as easy as console.log()">
+  <meta name="theme-color" content="#0a0a0a">
+  <link rel="icon" type="image/png" href="public/logo.png">
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+  <!-- Prism.js for syntax highlighting -->
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism-tomorrow.min.css" rel="stylesheet">
+
+  <!-- GSAP -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/TextPlugin.min.js"></script>
+
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <!-- ─── Nav ──────────────────────────────────────────────── -->
+  <nav id="nav">
+    <div class="nav-inner">
+      <a href="#hero" class="nav-logo">
+        <img src="public/logo.png" alt="console.agent" width="32" height="32">
+        <span>console<span class="accent">.agent</span></span>
+      </a>
+      <div class="nav-links">
+        <a href="#quickstart">Quick Start</a>
+        <a href="#how-it-works">How It Works</a>
+        <a href="#api">API</a>
+        <a href="#personas">Personas</a>
+        <a href="#config">Config</a>
+        <a href="https://github.com/console-agent/console_agent" target="_blank" class="nav-github">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg>
+        </a>
+        <a href="https://www.npmjs.com/package/@console-agent/agent" target="_blank" class="nav-npm">npm</a>
+      </div>
+      <button class="nav-mobile-toggle" aria-label="Menu">☰</button>
+    </div>
+  </nav>
+
+  <!-- ─── Hero ─────────────────────────────────────────────── -->
+  <section id="hero">
+    <div class="hero-bg"></div>
+    <div class="hero-content">
+      <div class="hero-badge">v1.0 — Powered by Google Gemini</div>
+      <h1 class="hero-title">
+        The <span class="accent">jQuery</span> of<br>AI Agents
+      </h1>
+      <p class="hero-subtitle">
+        Drop <code>console.agent(...)</code> anywhere in your code to execute agentic workflows — as easy as <code>console.log()</code>
+      </p>
+
+      <!-- Terminal Demo -->
+      <div class="terminal">
+        <div class="terminal-header">
+          <span class="terminal-dot red"></span>
+          <span class="terminal-dot yellow"></span>
+          <span class="terminal-dot green"></span>
+          <span class="terminal-title">terminal</span>
+        </div>
+        <div class="terminal-body">
+          <div class="terminal-line">
+            <span class="terminal-prompt">$</span>
+            <span class="terminal-cmd" id="install-cmd"></span>
+            <span class="terminal-cursor" id="cursor1">▊</span>
+          </div>
+          <div class="terminal-line terminal-output" id="term-output-1" style="opacity:0">
+            <span class="terminal-dim">+ @console-agent/agent@1.0.0</span>
+          </div>
+          <div class="terminal-line" id="term-line-2" style="opacity:0">
+            <span class="terminal-prompt">$</span>
+            <span class="terminal-cmd" id="node-cmd"></span>
+            <span class="terminal-cursor" id="cursor2">▊</span>
+          </div>
+          <div class="terminal-output-block" id="term-agent-output" style="opacity:0">
+            <div><span class="t-gray">[AGENT]</span> <span class="t-green">✓</span> 🛡️ <span class="t-bold">Security audit</span> Complete</div>
+            <div><span class="t-gray">[AGENT]</span> ├─ <span class="t-green">✓</span> <span class="t-white">SQL injection detected in user input</span></div>
+            <div><span class="t-gray">[AGENT]</span> ├─ <span class="t-dim">Tool:</span> <span class="t-cyan">google_search</span></div>
+            <div><span class="t-gray">[AGENT]</span> ├─ <span class="t-dim">fix:</span> <span class="t-white">Use parameterized queries</span></div>
+            <div><span class="t-gray">[AGENT]</span> └─ <span class="t-green">confidence: 0.94</span> | <span class="t-dim">247ms</span> | <span class="t-dim">156 tokens</span></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="hero-actions">
+        <a href="#quickstart" class="btn btn-primary">Get Started</a>
+        <a href="https://github.com/console-agent/console_agent" target="_blank" class="btn btn-secondary">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg>
+          GitHub
+        </a>
+      </div>
+
+      <div class="hero-stats" id="hero-stats">
+        <div class="stat">
+          <span class="stat-num" data-target="1">0</span>
+          <span class="stat-label">Line to install</span>
+        </div>
+        <div class="stat">
+          <span class="stat-num" data-target="0">0</span>
+          <span class="stat-label">Config required</span>
+        </div>
+        <div class="stat">
+          <span class="stat-num" data-target="4">0</span>
+          <span class="stat-label">AI Personas</span>
+        </div>
+        <div class="stat">
+          <span class="stat-num" data-target="3">0</span>
+          <span class="stat-label">Built-in Tools</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ─── Why Section ──────────────────────────────────────── -->
+  <section id="why" class="section">
+    <div class="container">
+      <h2 class="section-title">Why <span class="accent">console.agent</span>?</h2>
+      <div class="why-grid">
+        <div class="why-card" data-anim="slide-up">
+          <div class="why-icon">😤</div>
+          <h3>Agents are too complicated</h3>
+          <p>Langchain requires 100+ lines of boilerplate. We need 1 line.</p>
+        </div>
+        <div class="why-card" data-anim="slide-up">
+          <div class="why-icon">🔧</div>
+          <h3>Wrong abstraction layer</h3>
+          <p>Existing tools are for chat apps, not runtime utilities.</p>
+        </div>
+        <div class="why-card" data-anim="slide-up">
+          <div class="why-icon">⚡</div>
+          <h3>console.agent is the jQuery of agents</h3>
+          <p>Simple API, powerful capabilities. Zero config works.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ─── Quick Start ──────────────────────────────────────── -->
+  <section id="quickstart" class="section section-dark">
+    <div class="container">
+      <h2 class="section-title">Quick Start</h2>
+      <p class="section-desc">Get running in under 30 seconds. No config needed.</p>
+
+      <div class="steps">
+        <div class="step" data-anim="slide-right">
+          <div class="step-num">1</div>
+          <div class="step-content">
+            <h3>Install</h3>
+            <div class="code-block">
+              <button class="copy-btn" data-copy="npm install @console-agent/agent @ai-sdk/google">Copy</button>
+              <pre><code class="language-bash">npm install @console-agent/agent @ai-sdk/google</code></pre>
+            </div>
+          </div>
+        </div>
+
+        <div class="step" data-anim="slide-right">
+          <div class="step-num">2</div>
+          <div class="step-content">
+            <h3>Set API Key</h3>
+            <div class="code-block">
+              <button class="copy-btn" data-copy='export GEMINI_API_KEY="your-key-here"'>Copy</button>
+              <pre><code class="language-bash">export GEMINI_API_KEY="your-key-here"</code></pre>
+            </div>
+            <p class="step-note">Free key at <a href="https://aistudio.google.com/apikey" target="_blank">aistudio.google.com/apikey</a></p>
+          </div>
+        </div>
+
+        <div class="step" data-anim="slide-right">
+          <div class="step-num">3</div>
+          <div class="step-content">
+            <h3>Use it</h3>
+            <div class="code-block">
+              <button class="copy-btn" data-copy='import &apos;@console-agent/agent&apos;;
+
+// Fire-and-forget — never blocks your app
+console.agent("analyze this error", error);
+
+// Blocking — await for structured results
+const result = await console.agent("validate email", email);
+
+// Persona shortcuts
+console.agent.security("check for SQL injection", input);
+console.agent.debug("why is this slow?", { duration, query });
+console.agent.architect("review API design", endpoint);'>Copy</button>
+              <pre><code class="language-typescript">import '@console-agent/agent';
+
+// Fire-and-forget — never blocks your app
+console.agent("analyze this error", error);
+
+// Blocking — await for structured results
+const result = await console.agent("validate email", email);
+
+// Persona shortcuts
+console.agent.security("check for SQL injection", input);
+console.agent.debug("why is this slow?", { duration, query });
+console.agent.architect("review API design", endpoint);</code></pre>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ─── How It Works ─────────────────────────────────────── -->
+  <section id="how-it-works" class="section">
+    <div class="container">
+      <h2 class="section-title">How It Works</h2>
+      <div class="flow">
+        <div class="flow-step" data-anim="fade-in"><span class="flow-icon">📝</span><span>Parse prompt + context</span></div>
+        <div class="flow-arrow" data-anim="fade-in">→</div>
+        <div class="flow-step" data-anim="fade-in"><span class="flow-icon">🎭</span><span>Auto-detect persona</span></div>
+        <div class="flow-arrow" data-anim="fade-in">→</div>
+        <div class="flow-step" data-anim="fade-in"><span class="flow-icon">🔒</span><span>Anonymize secrets</span></div>
+        <div class="flow-arrow" data-anim="fade-in">→</div>
+        <div class="flow-step" data-anim="fade-in"><span class="flow-icon">💰</span><span>Check budget</span></div>
+        <div class="flow-arrow" data-anim="fade-in">→</div>
+        <div class="flow-step" data-anim="fade-in"><span class="flow-icon">🤖</span><span>Gemini ToolLoopAgent</span></div>
+        <div class="flow-arrow" data-anim="fade-in">→</div>
+        <div class="flow-step" data-anim="fade-in"><span class="flow-icon">📊</span><span>Structured AgentResult</span></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ─── API Reference ────────────────────────────────────── -->
+  <section id="api" class="section section-dark">
+    <div class="container">
+      <h2 class="section-title">API Reference</h2>
+
+      <div class="api-card" data-anim="slide-up">
+        <h3><code>console.agent(prompt, context?, options?)</code></h3>
+        <p>The main API. Call it like <code>console.log()</code>.</p>
+        <div class="code-block">
+          <pre><code class="language-typescript">// Simple — fire-and-forget
+console.agent("explain this error", error);
+
+// Await structured results
+const result = await console.agent("analyze", data, {
+  persona: 'security',
+  model: 'gemini-3-flash-preview',
+  thinking: { level: 'high', includeThoughts: true },
+});
+
+console.log(result.success);    // boolean
+console.log(result.summary);    // "SQL injection detected..."
+console.log(result.confidence); // 0.94
+console.log(result.data);       // { vulnerability: "...", fix: "..." }</code></pre>
+        </div>
+      </div>
+
+      <div class="api-card" data-anim="slide-up">
+        <h3>Return Type: <code>AgentResult</code></h3>
+        <div class="code-block">
+          <pre><code class="language-typescript">interface AgentResult {
+  success: boolean;           // Overall task success
+  summary: string;            // Human-readable conclusion
+  reasoning?: string;         // Agent's thought process
+  data: Record&lt;string, any&gt;;  // Structured findings
+  actions: string[];          // Tools used / steps taken
+  confidence: number;         // 0-1 confidence score
+  metadata: {
+    model: string;
+    tokensUsed: number;
+    latencyMs: number;
+    toolCalls: ToolCall[];
+    cached: boolean;
+  };
+}</code></pre>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ─── Personas ─────────────────────────────────────────── -->
+  <section id="personas" class="section">
+    <div class="container">
+      <h2 class="section-title">AI Personas</h2>
+      <p class="section-desc">Auto-detected from your prompt keywords, or set explicitly.</p>
+
+      <div class="persona-grid">
+        <div class="persona-card" data-anim="stagger">
+          <div class="persona-icon">🛡️</div>
+          <h3>Security</h3>
+          <p class="persona-role">OWASP security expert</p>
+          <p class="persona-detect">Detects: injection, xss, vulnerability, csrf, exploit</p>
+          <div class="code-block code-sm">
+            <pre><code class="language-typescript">console.agent.security("audit this query", sql);</code></pre>
+          </div>
+        </div>
+        <div class="persona-card" data-anim="stagger">
+          <div class="persona-icon">🐛</div>
+          <h3>Debugger</h3>
+          <p class="persona-role">Senior debugging expert</p>
+          <p class="persona-detect">Detects: slow, error, optimize, crash, memory leak</p>
+          <div class="code-block code-sm">
+            <pre><code class="language-typescript">console.agent.debug("why is this slow?", metrics);</code></pre>
+          </div>
+        </div>
+        <div class="persona-card" data-anim="stagger">
+          <div class="persona-icon">🏗️</div>
+          <h3>Architect</h3>
+          <p class="persona-role">Principal engineer</p>
+          <p class="persona-detect">Detects: design, architecture, schema, scalability</p>
+          <div class="code-block code-sm">
+            <pre><code class="language-typescript">console.agent.architect("review API", endpoint);</code></pre>
+          </div>
+        </div>
+        <div class="persona-card" data-anim="stagger">
+          <div class="persona-icon">🔍</div>
+          <h3>General</h3>
+          <p class="persona-role">Full-stack senior engineer</p>
+          <p class="persona-detect">Default fallback — handles everything else</p>
+          <div class="code-block code-sm">
+            <pre><code class="language-typescript">console.agent("validate this data", records);</code></pre>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ─── Configuration ────────────────────────────────────── -->
+  <section id="config" class="section section-dark">
+    <div class="container">
+      <h2 class="section-title">Configuration</h2>
+      <p class="section-desc">Zero config works. Customize when you need to.</p>
+
+      <div class="config-grid">
+        <div class="api-card" data-anim="slide-left">
+          <h3>Full Config</h3>
+          <div class="code-block">
+            <pre><code class="language-typescript">import { init } from '@console-agent/agent';
+
+init({
+  apiKey: process.env.GEMINI_API_KEY,
+  model: 'gemini-2.5-flash-lite',
+  persona: 'general',
+  mode: 'fire-and-forget',
+  timeout: 10000,
+
+  budget: {
+    maxCallsPerDay: 100,
+    maxTokensPerCall: 8000,
+    costCapDaily: 1.00,  // USD
+  },
+
+  anonymize: true,   // Auto-strip secrets/PII
+  localOnly: false,  // Disable cloud tools
+  dryRun: false,     // Log without calling API
+  logLevel: 'info',
+});</code></pre>
+          </div>
+        </div>
+
+        <div class="features-list" data-anim="slide-right">
+          <div class="feature-item">
+            <h4>🔒 Privacy & Anonymization</h4>
+            <p>Auto-strips API keys, emails, IPs, AWS keys, private keys, and connection strings before sending to AI.</p>
+          </div>
+          <div class="feature-item">
+            <h4>💰 Budget Controls</h4>
+            <p>Hard daily limits on calls (100/day), tokens (8K/call), and cost ($1.00/day). Prevents cost explosion.</p>
+          </div>
+          <div class="feature-item">
+            <h4>⏱️ Rate Limiting</h4>
+            <p>Token bucket algorithm spreads calls evenly across 24 hours. Graceful degradation when limits hit.</p>
+          </div>
+          <div class="feature-item">
+            <h4>🧠 Thinking Mode</h4>
+            <p>Enable extended reasoning with <code>thinking: { level: 'high' }</code> for complex architecture and debugging tasks.</p>
+          </div>
+          <div class="feature-item">
+            <h4>🛠️ Built-in Tools</h4>
+            <p>Code execution (Python sandbox), Google Search (real-time grounding), and file analysis (PDF, images, video).</p>
+          </div>
+          <div class="feature-item">
+            <h4>📊 Structured Output</h4>
+            <p>Every call returns typed <code>AgentResult</code> with success, summary, data, confidence, and metadata.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ─── Models ───────────────────────────────────────────── -->
+  <section id="models" class="section">
+    <div class="container">
+      <h2 class="section-title">Models</h2>
+      <div class="models-table-wrap" data-anim="slide-up">
+        <table class="models-table">
+          <thead>
+            <tr>
+              <th>Model</th>
+              <th>Best For</th>
+              <th>Speed</th>
+              <th>Cost</th>
+              <th>Default</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><code>gemini-2.5-flash-lite</code></td>
+              <td>General purpose, fast</td>
+              <td>~200ms</td>
+              <td>Very low</td>
+              <td><span class="badge-default">✅ Default</span></td>
+            </tr>
+            <tr>
+              <td><code>gemini-3-flash-preview</code></td>
+              <td>Complex reasoning, thinking</td>
+              <td>~400ms</td>
+              <td>Low</td>
+              <td></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <!-- ─── Use Cases ────────────────────────────────────────── -->
+  <section id="usecases" class="section section-dark">
+    <div class="container">
+      <h2 class="section-title">Use Cases</h2>
+      <div class="usecases-grid">
+        <div class="usecase-card" data-anim="stagger">
+          <span class="usecase-icon">🛡️</span>
+          <h4>Security Auditing</h4>
+          <code>console.agent.security("check for SQL injection", userInput)</code>
+        </div>
+        <div class="usecase-card" data-anim="stagger">
+          <span class="usecase-icon">🐛</span>
+          <h4>Debugging</h4>
+          <code>console.agent.debug("why is this slow?", { duration, query })</code>
+        </div>
+        <div class="usecase-card" data-anim="stagger">
+          <span class="usecase-icon">📊</span>
+          <h4>Data Validation</h4>
+          <code>await console.agent("validate batch meets schema", records)</code>
+        </div>
+        <div class="usecase-card" data-anim="stagger">
+          <span class="usecase-icon">🏗️</span>
+          <h4>Architecture Review</h4>
+          <code>console.agent.architect("review API design", { endpoint })</code>
+        </div>
+        <div class="usecase-card" data-anim="stagger">
+          <span class="usecase-icon">🔢</span>
+          <h4>Math & Reasoning</h4>
+          <code>await console.agent("calculate optimal batch size", metrics)</code>
+        </div>
+        <div class="usecase-card" data-anim="stagger">
+          <span class="usecase-icon">🔍</span>
+          <h4>Research</h4>
+          <code>console.agent("research CVEs for lodash@4.17.20")</code>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ─── Footer ───────────────────────────────────────────── -->
+  <footer id="footer">
+    <div class="container">
+      <div class="footer-inner">
+        <div class="footer-brand">
+          <img src="public/logo.png" alt="console.agent" width="24" height="24">
+          <span>console<span class="accent">.agent</span></span>
+        </div>
+        <div class="footer-links">
+          <a href="https://github.com/console-agent/console_agent" target="_blank">GitHub</a>
+          <a href="https://www.npmjs.com/package/@console-agent/agent" target="_blank">npm</a>
+          <a href="https://aistudio.google.com/apikey" target="_blank">Get API Key</a>
+        </div>
+        <div class="footer-copy">MIT © Pavel</div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Prism.js -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-typescript.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-bash.min.js"></script>
+
+  <script src="script.js"></script>
+</body>
+</html>
