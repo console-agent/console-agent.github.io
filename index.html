@@ -124,8 +124,65 @@
     </div>
   </section>
 
+  <!-- ─── Before / After ──────────────────────────────────── -->
+  <section id="before-after" class="section">
+    <div class="container">
+      <h2 class="section-title">See the <span class="accent">Difference</span></h2>
+      <p class="section-desc">From guesswork to answers. One line changes everything.</p>
+      <div class="ba-grid">
+        <!-- BEFORE -->
+        <div class="ba-card ba-before" data-anim="slide-right">
+          <div class="ba-label ba-label-before">❌ Before — console.log hell</div>
+          <div class="terminal terminal-sm">
+            <div class="terminal-header">
+              <span class="terminal-dot red"></span>
+              <span class="terminal-dot yellow"></span>
+              <span class="terminal-dot green"></span>
+              <span class="terminal-title">your-app.js</span>
+            </div>
+            <div class="terminal-body ba-body">
+              <div class="ba-line ba-dim">console.log("error here:", err);</div>
+              <div class="ba-line ba-dim">console.log("data:", JSON.stringify(data));</div>
+              <div class="ba-line ba-dim">console.log("hmm", typeof result);</div>
+              <div class="ba-line ba-dim">console.log("WHY IS THIS NULL???");</div>
+              <div class="ba-line ba-dim">console.log("trying fix #47...");</div>
+              <div class="ba-line ba-dim">console.log(data?.users?.map);</div>
+              <div class="ba-line ba-dim">// 45 minutes later...</div>
+              <div class="ba-line ba-dim">console.log("FOUND IT maybe?");</div>
+            </div>
+          </div>
+          <div class="ba-verdict ba-verdict-before">⏱️ 45 min of guesswork. No confidence.</div>
+        </div>
+        <!-- AFTER -->
+        <div class="ba-card ba-after" data-anim="slide-left">
+          <div class="ba-label ba-label-after">✅ After — console.agent</div>
+          <div class="terminal terminal-sm">
+            <div class="terminal-header">
+              <span class="terminal-dot red"></span>
+              <span class="terminal-dot yellow"></span>
+              <span class="terminal-dot green"></span>
+              <span class="terminal-title">your-app.js</span>
+            </div>
+            <div class="terminal-body ba-body">
+              <div class="ba-line"><span class="t-cyan">console.agent.debug</span>(<span class="t-string">"why is this null?"</span>, err);</div>
+              <div class="ba-line ba-spacer"></div>
+              <div class="ba-line"><span class="t-gray">[AGENT]</span> 🐛 <span class="t-bold">Analyzing error...</span></div>
+              <div class="ba-line"><span class="t-gray">[AGENT]</span> ├─ <span class="t-dim">Tool:</span> <span class="t-cyan">code_execution</span> → Tested fix</div>
+              <div class="ba-line"><span class="t-gray">[AGENT]</span> └─ <span class="t-green">✓ ROOT CAUSE IDENTIFIED</span></div>
+              <div class="ba-line ba-spacer"></div>
+              <div class="ba-line"><span class="t-dim">Likely cause:</span> <span class="t-white">Missing await on async fn</span></div>
+              <div class="ba-line"><span class="t-dim">Suggested fix:</span> <span class="t-white">Add 'await' on line 47</span></div>
+              <div class="ba-line"><span class="t-green">Confidence: 0.92</span> <span class="t-dim">| 312ms | 189 tokens</span></div>
+            </div>
+          </div>
+          <div class="ba-verdict ba-verdict-after">⚡ 1 line. 312ms. Root cause + fix.</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
   <!-- ─── Why Section ──────────────────────────────────────── -->
-  <section id="why" class="section">
+  <section id="why" class="section section-dark">
     <div class="container">
       <h2 class="section-title">Why <span class="accent">console.agent</span>?</h2>
       <div class="why-grid">
@@ -341,6 +398,7 @@ console.log(result.data);       // { vulnerability: "...", fix: "..." }</code></
           <h3>Full Config</h3>
           <div class="code-block">
             <pre><code class="language-typescript">import { init } from '@console-agent/agent';
+import { z } from 'zod';
 
 init({
   apiKey: process.env.GEMINI_API_KEY,
@@ -359,7 +417,41 @@ init({
   localOnly: false,  // Disable cloud tools
   dryRun: false,     // Log without calling API
   logLevel: 'info',
-});</code></pre>
+});
+
+// ── Structured Output ────────────────────────
+
+// Option A: Zod schema → typed, validated
+const result = await console.agent(
+  "analyze sentiment", review,
+  {
+    schema: z.object({
+      sentiment: z.enum(["positive","negative","neutral"]),
+      score: z.number(),
+      keywords: z.array(z.string()),
+    }),
+  }
+);
+result.data.sentiment; // "positive" ✅ typed
+
+// Option B: Plain JSON Schema (no Zod needed)
+const info = await console.agent(
+  "extract info", text,
+  {
+    responseFormat: {
+      type: 'json_object',
+      schema: {
+        type: 'object',
+        properties: {
+          name: { type: 'string' },
+          age:  { type: 'number' },
+        },
+        required: ['name', 'age'],
+      },
+    },
+  }
+);
+info.data.name; // "John Doe" ✅</code></pre>
           </div>
         </div>
 
@@ -386,7 +478,7 @@ init({
           </div>
           <div class="feature-item">
             <h4>📊 Structured Output</h4>
-            <p>Every call returns typed <code>AgentResult</code> with success, summary, data, confidence, and metadata.</p>
+            <p>Every call returns typed <code>AgentResult</code>. Pass a Zod <code>schema</code> or <code>responseFormat</code> (JSON Schema) for custom-shaped output.</p>
           </div>
         </div>
       </div>
