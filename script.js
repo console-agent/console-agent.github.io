@@ -16,10 +16,13 @@ heroTL
   .to('#cursor1', { opacity: 0, duration: 0.1 })
   .to('#term-output-1', { opacity: 1, duration: 0.3 })
   .to('#term-line-2', { opacity: 1, duration: 0.2 }, '+=0.3')
-  .to('#node-cmd', { text: 'console.agent.security("audit input", req.body)', duration: 1.8, ease: 'none' })
+  .to('#node-cmd', { text: 'console.agent.security("audit input", req.body, { verbose: true })', duration: 2.2, ease: 'none' })
   .to('#cursor2', { opacity: 0, duration: 0.1 })
   .to('#term-agent-output', { opacity: 1, duration: 0.4 })
   .from('#term-agent-output > div', { opacity: 0, x: -10, stagger: 0.15, duration: 0.3 })
+  .to('#term-verbose-label', { opacity: 1, duration: 0.4 }, '+=0.3')
+  .to('#term-quiet-output', { opacity: 1, duration: 0.4 })
+  .from('#term-quiet-output > div', { opacity: 0, x: -10, stagger: 0.12, duration: 0.3 })
   .from('.hero-actions', { opacity: 0, y: 20, duration: 0.5 }, '-=0.5')
   .from('.hero-stats', { opacity: 0, y: 20, duration: 0.5 }, '-=0.3');
 
@@ -367,7 +370,7 @@ info.data["name"]  # "John Doe" ✅`,
         if (dim) dim.textContent = '+ console-agent@1.0.0';
         termOutput.style.opacity = '1';
       }
-      if (nodeCmd) nodeCmd.textContent = 'agent.security("audit input", context=req_body)';
+      if (nodeCmd) nodeCmd.textContent = 'agent.security("audit input", context=req_body, verbose=True)';
       // Show all terminal lines
       const termLine2 = document.getElementById('term-line-2');
       const termAgentOut = document.getElementById('term-agent-output');
@@ -382,7 +385,7 @@ info.data["name"]  # "John Doe" ✅`,
         const dim = termOutput.querySelector('.terminal-dim');
         if (dim) dim.textContent = '+ @console-agent/agent@1.0.0';
       }
-      if (nodeCmd) nodeCmd.textContent = 'console.agent.security("audit input", req.body)';
+      if (nodeCmd) nodeCmd.textContent = 'console.agent.security("audit input", req.body, { verbose: true })';
       gsap.killTweensOf('#install-cmd');
       gsap.killTweensOf('#node-cmd');
     }
