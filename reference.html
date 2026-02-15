@@ -125,22 +125,27 @@
     // Custom renderer for syntax highlighting
     const renderer = new marked.Renderer();
 
-    renderer.code = function({ text, lang }) {
-      const language = lang || 'text';
+    renderer.code = function(token) {
+      const text = typeof token === 'object' ? (token.text || token.code || '') : String(token);
+      const language = (typeof token === 'object' ? (token.lang || '') : '') || 'text';
       const grammar = Prism.languages[language] || Prism.languages.plain || Prism.languages.clike;
       let highlighted;
       try {
         highlighted = Prism.highlight(text, grammar, language);
       } catch (e) {
-        highlighted = text;
+        highlighted = text.replace(/</g, '&lt;').replace(/>/g, '&gt;');
       }
       return `<div class="code-block"><pre><code class="language-${language}">${highlighted}</code></pre></div>`;
     };
 
-    renderer.table = function({ header, rows }) {
+    renderer.table = function(token) {
+      const header = token && token.header ? token.header : [];
+      const rows = token && token.rows ? token.rows : [];
+
       let headerHtml = '<tr>';
       for (const cell of header) {
-        headerHtml += `<th>${cell.text}</th>`;
+        const cellText = typeof cell === 'object' ? (cell.text || '') : String(cell);
+        headerHtml += `<th>${cellText}</th>`;
       }
       headerHtml += '</tr>';
 
@@ -148,7 +153,8 @@
       for (const row of rows) {
         bodyHtml += '<tr>';
         for (const cell of row) {
-          bodyHtml += `<td>${cell.text}</td>`;
+          const cellText = typeof cell === 'object' ? (cell.text || '') : String(cell);
+          bodyHtml += `<td>${cellText}</td>`;
         }
         bodyHtml += '</tr>';
       }
@@ -156,9 +162,12 @@
       return `<div class="models-table-wrap"><table class="models-table"><thead>${headerHtml}</thead><tbody>${bodyHtml}</tbody></table></div>`;
     };
 
-    renderer.heading = function({ text, depth }) {
+    renderer.heading = function(token) {
+      const text = typeof token === 'object' ? (token.text || token.raw || '') : String(token);
+      const depth = typeof token === 'object' ? (token.depth || 2) : 2;
       const slug = text
         .toLowerCase()
+        .replace(/<[^>]*>/g, '')
         .replace(/[^\w\s-]/g, '')
         .replace(/\s+/g, '-')
         .replace(/-+/g, '-')
