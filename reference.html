@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>API Reference — console.agent</title>
+  <meta name="description" content="Full API reference for console.agent — Node.js/TypeScript and Python">
+  <meta name="theme-color" content="#0a0a0a">
+  <link rel="icon" type="image/png" href="public/logo.png">
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+  <!-- Prism.js for syntax highlighting -->
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism-tomorrow.min.css" rel="stylesheet">
+
+  <!-- Marked.js for markdown rendering -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/marked/12.0.1/marked.min.js"></script>
+
+  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="reference.css">
+</head>
+<body>
+
+  <!-- ─── Nav ──────────────────────────────────────────────── -->
+  <nav id="nav">
+    <div class="nav-inner">
+      <a href="index.html" class="nav-logo">
+        <img src="public/logo.png" alt="console.agent" width="32" height="32">
+        <span>console<span class="accent">.agent</span></span>
+      </a>
+      <div class="nav-links">
+        <a href="index.html">Home</a>
+        <a href="index.html#quickstart">Quick Start</a>
+        <a href="index.html#api">API</a>
+        <a href="reference.html" class="nav-active">Reference</a>
+        <a href="https://github.com/console-agent/console_agent" target="_blank" class="nav-github">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg>
+        </a>
+        <a href="https://www.npmjs.com/package/@console-agent/agent" target="_blank" class="nav-npm">npm</a>
+        <a href="https://pypi.org/project/console-agent/" target="_blank" class="nav-pypi">PyPI</a>
+        <div class="lang-toggle">
+          <button class="lang-toggle-btn active" data-lang="js" title="Node.js / TypeScript">JS</button>
+          <button class="lang-toggle-btn" data-lang="python" title="Python">PY</button>
+        </div>
+      </div>
+      <button class="nav-mobile-toggle" aria-label="Menu">☰</button>
+    </div>
+  </nav>
+
+  <!-- ─── Reference Content ────────────────────────────────── -->
+  <main id="reference-page">
+    <div class="container">
+      <div class="ref-header">
+        <h1 class="ref-title">📖 API <span class="accent">Reference</span></h1>
+        <p class="ref-subtitle">
+          Complete documentation for
+          <span class="lang-js">Node.js / TypeScript</span>
+          <span class="lang-py">Python</span>
+        </p>
+      </div>
+
+      <!-- Sidebar TOC -->
+      <div class="ref-layout">
+        <aside class="ref-sidebar" id="ref-sidebar">
+          <div class="ref-sidebar-title">On this page</div>
+          <nav id="ref-toc"></nav>
+        </aside>
+
+        <!-- Markdown content -->
+        <article class="ref-content" id="ref-content">
+          <div class="ref-loading" id="ref-loading">
+            <div class="ref-spinner"></div>
+            <p>Loading documentation...</p>
+          </div>
+        </article>
+      </div>
+    </div>
+  </main>
+
+  <!-- ─── Footer ───────────────────────────────────────────── -->
+  <footer id="footer">
+    <div class="container">
+      <div class="footer-inner">
+        <div class="footer-brand">
+          <img src="public/logo.png" alt="console.agent" width="24" height="24">
+          <span>console<span class="accent">.agent</span></span>
+        </div>
+        <div class="footer-links">
+          <a href="https://github.com/console-agent/console_agent" target="_blank">GitHub (JS)</a>
+          <a href="https://github.com/console-agent/console_agent_python" target="_blank">GitHub (Python)</a>
+          <a href="https://www.npmjs.com/package/@console-agent/agent" target="_blank">npm</a>
+          <a href="https://pypi.org/project/console-agent/" target="_blank">PyPI</a>
+          <a href="https://aistudio.google.com/apikey" target="_blank">Get API Key</a>
+        </div>
+        <div class="footer-copy">MIT © Pavel</div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Prism.js -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-typescript.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-bash.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-python.min.js"></script>
+
+  <script>
+  // ─── Reference Page Logic ──────────────────────────────────
+  (function() {
+    const DOCS_URLS = {
+      js: 'https://raw.githubusercontent.com/console-agent/console_agent/refs/heads/main/docs.md',
+      python: 'https://raw.githubusercontent.com/console-agent/console_agent_python/refs/heads/main/docs.md',
+    };
+
+    const cache = {};
+    let currentLang = 'js';
+
+    // Configure marked
+    marked.setOptions({
+      gfm: true,
+      breaks: false,
+    });
+
+    // Custom renderer for syntax highlighting
+    const renderer = new marked.Renderer();
+
+    renderer.code = function({ text, lang }) {
+      const language = lang || 'text';
+      const grammar = Prism.languages[language] || Prism.languages.plain || Prism.languages.clike;
+      let highlighted;
+      try {
+        highlighted = Prism.highlight(text, grammar, language);
+      } catch (e) {
+        highlighted = text;
+      }
+      return `<div class="code-block"><pre><code class="language-${language}">${highlighted}</code></pre></div>`;
+    };
+
+    renderer.table = function({ header, rows }) {
+      let headerHtml = '<tr>';
+      for (const cell of header) {
+        headerHtml += `<th>${cell.text}</th>`;
+      }
+      headerHtml += '</tr>';
+
+      let bodyHtml = '';
+      for (const row of rows) {
+        bodyHtml += '<tr>';
+        for (const cell of row) {
+          bodyHtml += `<td>${cell.text}</td>`;
+        }
+        bodyHtml += '</tr>';
+      }
+
+      return `<div class="models-table-wrap"><table class="models-table"><thead>${headerHtml}</thead><tbody>${bodyHtml}</tbody></table></div>`;
+    };
+
+    renderer.heading = function({ text, depth }) {
+      const slug = text
+        .toLowerCase()
+        .replace(/[^\w\s-]/g, '')
+        .replace(/\s+/g, '-')
+        .replace(/-+/g, '-')
+        .trim();
+      return `<h${depth} id="${slug}" class="ref-heading ref-h${depth}"><a href="#${slug}" class="ref-anchor">#</a>${text}</h${depth}>`;
+    };
+
+    marked.use({ renderer });
+
+    async function fetchDocs(lang) {
+      if (cache[lang]) return cache[lang];
+
+      const url = DOCS_URLS[lang];
+      try {
+        const resp = await fetch(url);
+        if (!resp.ok) throw new Error(`HTTP ${resp.status}`);
+        const md = await resp.text();
+        cache[lang] = md;
+        return md;
+      } catch (err) {
+        console.error(`Failed to fetch ${lang} docs:`, err);
+        return `# Error Loading Documentation\n\nCould not fetch the documentation from GitHub.\n\nTry visiting the source directly:\n- [JS Docs](${DOCS_URLS.js})\n- [Python Docs](${DOCS_URLS.python})`;
+      }
+    }
+
+    function buildTOC(html) {
+      const toc = document.getElementById('ref-toc');
+      const headings = document.querySelectorAll('#ref-content .ref-heading');
+      let tocHtml = '';
+
+      headings.forEach(h => {
+        const level = parseInt(h.tagName.charAt(1));
+        if (level > 3) return;
+        const id = h.id;
+        const text = h.textContent.replace('#', '').trim();
+        const indent = level === 2 ? '' : level === 3 ? 'toc-indent' : '';
+        tocHtml += `<a href="#${id}" class="toc-link ${indent}">${text}</a>`;
+      });
+
+      toc.innerHTML = tocHtml;
+
+      // Active state on scroll
+      const links = toc.querySelectorAll('.toc-link');
+      const observer = new IntersectionObserver(entries => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            links.forEach(l => l.classList.remove('toc-active'));
+            const active = toc.querySelector(`a[href="#${entry.target.id}"]`);
+            if (active) active.classList.add('toc-active');
+          }
+        });
+      }, { rootMargin: '-80px 0px -80% 0px' });
+
+      headings.forEach(h => observer.observe(h));
+    }
+
+    async function renderDocs(lang) {
+      const content = document.getElementById('ref-content');
+      const loading = document.getElementById('ref-loading');
+
+      if (loading) loading.style.display = 'flex';
+
+      const md = await fetchDocs(lang);
+      const html = marked.parse(md);
+
+      content.innerHTML = html;
+
+      // Re-highlight any code blocks that marked didn't catch
+      content.querySelectorAll('pre code').forEach(block => {
+        Prism.highlightElement(block);
+      });
+
+      buildTOC(html);
+    }
+
+    function switchLang(lang) {
+      currentLang = lang;
+      document.body.classList.toggle('lang-python', lang === 'python');
+
+      document.querySelectorAll('.lang-toggle-btn').forEach(btn => {
+        btn.classList.toggle('active', btn.dataset.lang === lang);
+      });
+
+      renderDocs(lang);
+    }
+
+    // Bind toggle buttons
+    document.querySelectorAll('.lang-toggle-btn').forEach(btn => {
+      btn.addEventListener('click', () => switchLang(btn.dataset.lang));
+    });
+
+    // Initial load
+    renderDocs('js');
+  })();
+  </script>
+</body>
+</html>

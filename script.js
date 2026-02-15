@@ -215,7 +215,9 @@ class ResultMetadata:
       pyLang: 'python' },
     // Config: Full Config
     { match: "import { init } from '@console-agent/agent'",
-      py: `from console_agent import agent, init
+      py: `import os
+from console_agent import agent, init
+from console_agent.types import FileAttachment
 from pydantic import BaseModel, Field
 from typing import List
 
@@ -232,10 +234,11 @@ init(
         "cost_cap_daily": 1.00,  # USD
     },
 
-    anonymize=True,    # Auto-strip secrets/PII
-    local_only=False,  # Disable cloud tools
-    dry_run=False,     # Log without calling API
+    anonymize=True,              # Auto-strip secrets/PII
+    local_only=False,            # Disable cloud tools
+    dry_run=False,               # Log without calling API
     log_level="info",
+    include_caller_source=True,  # Auto-read source file
 )
 
 # ── Structured Output ────────────────────────
@@ -252,22 +255,17 @@ result = agent(
 )
 result.data["sentiment"]  # "positive" ✅ typed
 
-# Option B: Plain JSON Schema (no Pydantic needed)
-info = agent(
-    "extract info", context=text,
-    response_format={
-        "type": "json_object",
-        "schema": {
-            "type": "object",
-            "properties": {
-                "name": {"type": "string"},
-                "age":  {"type": "number"},
-            },
-            "required": ["name", "age"],
-        },
-    },
-)
-info.data["name"]  # "John Doe" ✅`,
+# ── File Attachments ─────────────────────────
+
+doc = agent(
+    "What does this document say?",
+    files=[
+        FileAttachment(
+            filepath="./data/report.pdf",
+            media_type="application/pdf",
+        ),
+    ],
+)`,
       pyLang: 'python' },
   ];
 
