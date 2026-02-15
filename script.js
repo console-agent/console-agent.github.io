@@ -319,6 +319,14 @@ doc = agent(
       btn.classList.toggle('active', btn.dataset.lang === lang);
     });
 
+    // Update GitHub link based on language
+    const ghLink = document.querySelector('.nav-github');
+    if (ghLink) {
+      ghLink.href = isPy
+        ? 'https://github.com/console-agent/console_agent_python'
+        : 'https://github.com/console-agent/console_agent';
+    }
+
     // Switch code blocks
     codeBlocks.forEach(el => {
       const orig = originals.get(el);
