@@ -282,6 +282,34 @@ body.lang-python div.lang-py.flex-item { display: flex; }
 .usecase-card h4 { color: #fff; margin-bottom: 10px; }
 .usecase-card code { font-size: 0.78rem; color: #aaa; background: rgba(255,255,255,0.04); display: block; padding: 8px 12px; border-radius: 6px; word-break: break-all; }
 
+/* ─── AI Skill Banner (compact) ────────────────────────── */
+.skill-banner {
+  margin-top: 48px;
+  background: linear-gradient(135deg, rgba(0,229,160,0.06) 0%, rgba(0,229,160,0.02) 100%);
+  border: 1px solid rgba(0,229,160,0.2); border-radius: 12px;
+  padding: 20px 24px;
+}
+.skill-banner-inner {
+  display: flex; align-items: center; gap: 20px; flex-wrap: wrap;
+}
+.skill-banner-text {
+  display: flex; align-items: center; gap: 12px; flex-shrink: 0;
+  color: #ccc; font-size: 0.9rem;
+}
+.skill-banner-text strong { color: #fff; }
+.skill-banner-icon { font-size: 1.3rem; }
+.skill-banner-action { flex: 1; min-width: 280px; }
+.skill-banner-action .code-block { border-color: rgba(0,229,160,0.15); }
+.skill-banner-link {
+  display: flex; align-items: center; color: #666; transition: color 0.2s; flex-shrink: 0;
+}
+.skill-banner-link:hover { color: #00e5a0; opacity: 1; }
+
+@media (max-width: 768px) {
+  .skill-banner-inner { flex-direction: column; align-items: stretch; }
+  .skill-banner-action { min-width: 0; }
+}
+
 /* ─── Footer ───────────────────────────────────────────── */
 #footer { padding: 40px 0; border-top: 1px solid rgba(255,255,255,0.06); }
 .footer-inner { display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 16px; }
