@@ -51,6 +51,7 @@
       <div class="nav-links">
         <a href="#quickstart">Quick Start</a>
         <a href="#how-it-works">How It Works</a>
+        <a href="#testing-carousel">Testing</a>
         <a href="#api">API</a>
         <a href="#personas">Personas</a>
         <a href="#tools">Tools</a>
@@ -393,6 +394,283 @@ console.agent.architect("review API design", endpoint);</code></pre>
         <div class="flow-step" data-anim="fade-in"><span class="flow-icon">🤖</span><span>Gemini ToolLoopAgent</span></div>
         <div class="flow-arrow" data-anim="fade-in">→</div>
         <div class="flow-step" data-anim="fade-in"><span class="flow-icon">📊</span><span>Structured AgentResult</span></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ─── Testing Carousel ─────────────────────────────────── -->
+  <section id="testing-carousel" class="section section-dark">
+    <div class="container">
+      <h2 class="section-title">Test Suite <span class="accent">Superpowers</span></h2>
+      <p class="section-desc">AI-powered debugging, security auditing, and root cause analysis — right inside your tests.</p>
+
+      <div class="carousel">
+        <div class="carousel-track">
+
+          <!-- Slide 1: Hook / Title Card -->
+          <div class="carousel-slide carousel-slide-active">
+            <div class="carousel-title-card">
+              <div class="carousel-title-logo">console<span class="accent">.agent</span></div>
+              <h3 class="carousel-title-headline">The <span class="accent">jQuery</span> of AI Agents</h3>
+              <p class="carousel-title-sub">AI debugging inside your test suite</p>
+              <div class="carousel-title-stats">
+                <div class="carousel-stat">
+                  <span class="carousel-stat-label">Before</span>
+                  <span class="carousel-stat-val carousel-stat-bad">45 minutes</span>
+                  <span class="carousel-stat-desc">of console.logs</span>
+                </div>
+                <div class="carousel-stat-arrow">→</div>
+                <div class="carousel-stat">
+                  <span class="carousel-stat-label">After</span>
+                  <span class="carousel-stat-val carousel-stat-good">2.6 seconds</span>
+                  <span class="carousel-stat-desc">to root cause</span>
+                </div>
+              </div>
+              <p class="carousel-title-tagline">Real tests. Real output.</p>
+            </div>
+          </div>
+
+          <!-- Slide 2: Debug Test — Side by Side -->
+          <div class="carousel-slide">
+            <div class="carousel-split">
+              <div class="carousel-code-pane">
+                <div class="carousel-pane-label">CODE</div>
+                <div class="terminal terminal-sm">
+                  <div class="terminal-header">
+                    <span class="terminal-dot red"></span>
+                    <span class="terminal-dot yellow"></span>
+                    <span class="terminal-dot green"></span>
+                    <span class="terminal-title">debug.test.js</span>
+                  </div>
+                  <div class="terminal-body">
+<pre class="carousel-pre"><span class="t-cyan">it</span>(<span class="t-string">"debug failing test"</span>, <span class="t-cyan">async</span> () => {
+  <span class="t-dim">const</span> result =
+    <span class="t-cyan">await</span> processPayment(input);
+
+  <span class="t-dim">try</span> {
+    expect(result.success)
+      .to.equal(<span class="t-cyan">false</span>);
+  } <span class="t-dim">catch</span> (error) {
+    <span class="t-dim">const</span> diagnosis =
+      <span class="t-cyan">await</span> console.agent.debug(
+        <span class="t-string">"why did test fail?"</span>,
+        { input, result, error }
+      );
+    console.log(diagnosis);
+  }
+});</pre>
+                  </div>
+                </div>
+              </div>
+              <div class="carousel-output-pane">
+                <div class="carousel-pane-label">OUTPUT</div>
+                <div class="terminal terminal-sm">
+                  <div class="terminal-header">
+                    <span class="terminal-dot red"></span>
+                    <span class="terminal-dot yellow"></span>
+                    <span class="terminal-dot green"></span>
+                    <span class="terminal-title">test results</span>
+                  </div>
+                  <div class="terminal-body">
+                    <div class="carousel-output-line"><span class="t-green">✔</span> surfaces likely root cause</div>
+                    <div class="carousel-output-line carousel-output-dim">on failing payment test <span class="t-dim">(2669ms)</span></div>
+                    <div class="carousel-output-spacer"></div>
+                    <div class="carousel-output-line"><span class="t-white">Payment test failed because</span></div>
+                    <div class="carousel-output-line"><span class="t-white">expected failure condition</span></div>
+                    <div class="carousel-output-line"><span class="t-white">was not met due to</span></div>
+                    <div class="carousel-output-line"><span class="t-white">asynchronous token handling.</span></div>
+                    <div class="carousel-output-spacer"></div>
+                    <div class="carousel-output-line"><span class="t-dim">⏱️</span> <span class="t-green">2.6 seconds</span></div>
+                    <div class="carousel-output-line"><span class="t-dim">🎯</span> <span class="t-green">Root cause identified</span></div>
+                    <div class="carousel-output-spacer"></div>
+                    <div class="carousel-output-line"><span class="t-dim">Before:</span> <span class="t-yellow">45 min</span> of debugging</div>
+                    <div class="carousel-output-line"><span class="t-dim">After:</span> <span class="t-green">One line</span> of code</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Slide 3: Security Test — Side by Side -->
+          <div class="carousel-slide">
+            <div class="carousel-split">
+              <div class="carousel-code-pane">
+                <div class="carousel-pane-label">CODE</div>
+                <div class="terminal terminal-sm">
+                  <div class="terminal-header">
+                    <span class="terminal-dot red"></span>
+                    <span class="terminal-dot yellow"></span>
+                    <span class="terminal-dot green"></span>
+                    <span class="terminal-title">security.test.js</span>
+                  </div>
+                  <div class="terminal-body">
+<pre class="carousel-pre"><span class="t-cyan">it</span>(<span class="t-string">"detect NoSQL injection"</span>, () => {
+  <span class="t-dim">const</span> payload = {
+    raw: <span class="t-string">'{"$ne": null}'</span>
+  };
+
+  <span class="t-dim">const</span> audit =
+    <span class="t-cyan">await</span> console.agent.security(
+      <span class="t-string">"audit this input"</span>,
+      { payload, returnedCount }
+    );
+
+  expect(audit.summary)
+    .to.match(<span class="t-yellow">/injection/</span>);
+});</pre>
+                  </div>
+                </div>
+              </div>
+              <div class="carousel-output-pane">
+                <div class="carousel-pane-label">OUTPUT</div>
+                <div class="terminal terminal-sm">
+                  <div class="terminal-header">
+                    <span class="terminal-dot red"></span>
+                    <span class="terminal-dot yellow"></span>
+                    <span class="terminal-dot green"></span>
+                    <span class="terminal-title">test results</span>
+                  </div>
+                  <div class="terminal-body">
+                    <div class="carousel-output-line"><span class="t-green">✔</span> flags risky payload in</div>
+                    <div class="carousel-output-line carousel-output-dim">unsafe search path <span class="t-dim">(3544ms)</span></div>
+                    <div class="carousel-output-spacer"></div>
+                    <div class="carousel-output-line"><span class="t-yellow">⚠️  CRITICAL: NoSQL Injection</span></div>
+                    <div class="carousel-output-line"><span class="t-yellow">   vulnerability detected</span></div>
+                    <div class="carousel-output-spacer"></div>
+                    <div class="carousel-output-line"><span class="t-dim">📍 Location:</span> <span class="t-white">payload.raw</span></div>
+                    <div class="carousel-output-line"><span class="t-dim">   ('$ne': null)</span></div>
+                    <div class="carousel-output-spacer"></div>
+                    <div class="carousel-output-line"><span class="t-dim">🔧 Fix:</span> <span class="t-white">Sanitize inputs,</span></div>
+                    <div class="carousel-output-line"><span class="t-white">   use parameterized queries</span></div>
+                    <div class="carousel-output-spacer"></div>
+                    <div class="carousel-output-line"><span class="t-green">✅ Confidence: 95%</span></div>
+                    <div class="carousel-output-spacer"></div>
+                    <div class="carousel-output-line"><span class="t-dim">Real CVE detection in tests</span></div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Slide 4: MongoDB Test — Side by Side -->
+          <div class="carousel-slide">
+            <div class="carousel-split">
+              <div class="carousel-code-pane">
+                <div class="carousel-pane-label">CODE</div>
+                <div class="terminal terminal-sm">
+                  <div class="terminal-header">
+                    <span class="terminal-dot red"></span>
+                    <span class="terminal-dot yellow"></span>
+                    <span class="terminal-dot green"></span>
+                    <span class="terminal-title">mongo.test.js</span>
+                  </div>
+                  <div class="terminal-body">
+<pre class="carousel-pre"><span class="t-cyan">it</span>(<span class="t-string">"debug mongo query"</span>, <span class="t-cyan">async</span> () => {
+  <span class="t-dim">const</span> users =
+    <span class="t-cyan">await</span> findUsers({ role: <span class="t-string">"admin"</span> });
+
+  <span class="t-dim">try</span> {
+    expect(users.length)
+      .to.equal(<span class="t-cyan">2</span>);
+  } <span class="t-dim">catch</span> (error) {
+    <span class="t-dim">const</span> diagnosis =
+      <span class="t-cyan">await</span> console.agent.debug(
+        <span class="t-string">"why is assertion failing?"</span>,
+        { filter, users, error }
+      );
+    console.log(diagnosis);
+  }
+});</pre>
+                  </div>
+                </div>
+              </div>
+              <div class="carousel-output-pane">
+                <div class="carousel-pane-label">OUTPUT</div>
+                <div class="terminal terminal-sm">
+                  <div class="terminal-header">
+                    <span class="terminal-dot red"></span>
+                    <span class="terminal-dot yellow"></span>
+                    <span class="terminal-dot green"></span>
+                    <span class="terminal-title">test results</span>
+                  </div>
+                  <div class="terminal-body">
+                    <div class="carousel-output-line"><span class="t-green">✔</span> debugs a failing mongo</div>
+                    <div class="carousel-output-line carousel-output-dim">expectation with context <span class="t-dim">(2403ms)</span></div>
+                    <div class="carousel-output-spacer"></div>
+                    <div class="carousel-output-line"><span class="t-white">MongoDB assertion failed due</span></div>
+                    <div class="carousel-output-line"><span class="t-white">to a mismatch between</span></div>
+                    <div class="carousel-output-line"><span class="t-white">expected and actual document</span></div>
+                    <div class="carousel-output-line"><span class="t-white">counts.</span></div>
+                    <div class="carousel-output-spacer"></div>
+                    <div class="carousel-output-line"><span class="t-white">The query returned 1 document,</span></div>
+                    <div class="carousel-output-line"><span class="t-white">but 2 were expected.</span></div>
+                    <div class="carousel-output-line"><span class="t-white">The filter criteria matched</span></div>
+                    <div class="carousel-output-line"><span class="t-white">one document based on</span></div>
+                    <div class="carousel-output-line"><span class="t-white">role: 'admin'.</span></div>
+                    <div class="carousel-output-spacer"></div>
+                    <div class="carousel-output-line"><span class="t-dim">⏱️</span> <span class="t-green">2.4 seconds to diagnosis</span></div>
+                    <div class="carousel-output-line"><span class="t-dim">🎯</span> <span class="t-green">Context-aware analysis</span></div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Slide 5: Results + CTA -->
+          <div class="carousel-slide">
+            <div class="carousel-results-card">
+              <h3 class="carousel-results-title">Real Test Results</h3>
+              <div class="carousel-results-stats">
+                <div class="carousel-result-item"><span class="t-green">✅</span> 7 passing (12s)</div>
+                <div class="carousel-result-item"><span class="t-green">✅</span> 3 AI-powered debugging assertions</div>
+                <div class="carousel-result-item"><span class="t-green">✅</span> 2 security vulnerability detections</div>
+                <div class="carousel-result-item"><span class="t-green">✅</span> Zero manual investigation time</div>
+              </div>
+              <div class="carousel-results-divider"></div>
+              <div class="carousel-results-compat">
+                <h4>Works with:</h4>
+                <div class="carousel-compat-tags">
+                  <span class="carousel-tag">Mocha</span>
+                  <span class="carousel-tag">Vitest</span>
+                  <span class="carousel-tag">Jest</span>
+                  <span class="carousel-tag">Pytest</span>
+                  <span class="carousel-tag">Security auditing</span>
+                  <span class="carousel-tag">MongoDB queries</span>
+                  <span class="carousel-tag">Failed assertions</span>
+                </div>
+              </div>
+              <div class="carousel-results-divider"></div>
+              <div class="carousel-results-cta">
+                <div class="code-block code-sm">
+                  <button class="copy-btn" data-copy="npm install @console-agent/agent">Copy</button>
+                  <pre><code class="language-bash">npm install @console-agent/agent</code></pre>
+                </div>
+                <div class="carousel-cta-links">
+                  <a href="https://console-agent.github.io" class="carousel-cta-link">📖 console-agent.github.io</a>
+                  <a href="https://github.com/console-agent/console_agent" target="_blank" class="carousel-cta-link">⭐ github.com/console-agent/agent</a>
+                </div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+
+        <!-- Carousel Navigation -->
+        <button class="carousel-arrow carousel-arrow-prev" aria-label="Previous slide">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"></polyline></svg>
+        </button>
+        <button class="carousel-arrow carousel-arrow-next" aria-label="Next slide">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"></polyline></svg>
+        </button>
+
+        <!-- Dots -->
+        <div class="carousel-dots">
+          <button class="carousel-dot carousel-dot-active" data-slide="0" aria-label="Slide 1"></button>
+          <button class="carousel-dot" data-slide="1" aria-label="Slide 2"></button>
+          <button class="carousel-dot" data-slide="2" aria-label="Slide 3"></button>
+          <button class="carousel-dot" data-slide="3" aria-label="Slide 4"></button>
+          <button class="carousel-dot" data-slide="4" aria-label="Slide 5"></button>
+        </div>
       </div>
     </div>
   </section>

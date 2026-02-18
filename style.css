@@ -26,7 +26,7 @@ a:hover { opacity: 0.8; }
 }
 .nav-logo { display: flex; align-items: center; gap: 10px; font-weight: 700; font-size: 1.05rem; color: #fff; }
 .nav-logo img { border-radius: 6px; }
-.nav-links { display: flex; align-items: center; gap: 24px; font-size: 0.9rem; }
+.nav-links { display: flex; align-items: center; gap: 18px; font-size: 0.85rem; }
 .nav-links a { color: #999; transition: color 0.2s; }
 .nav-links a:hover { color: #fff; opacity: 1; }
 .nav-github, .nav-npm { display: flex; align-items: center; }
@@ -333,6 +333,259 @@ body.lang-python div.lang-py.flex-item { display: flex; }
   .persona-grid { grid-template-columns: 1fr; }
   .usecases-grid { grid-template-columns: 1fr; }
   .footer-inner { flex-direction: column; text-align: center; }
+}
+
+/* ─── Testing Carousel ─────────────────────────────────── */
+.carousel {
+  position: relative;
+  overflow: hidden;
+  border-radius: 16px;
+  border: 1px solid rgba(255,255,255,0.08);
+  background: #111118;
+}
+.carousel-track {
+  display: flex;
+  transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+}
+.carousel-slide {
+  min-width: 100%;
+  flex-shrink: 0;
+  padding: 40px;
+}
+
+/* Slide 1: Title Card */
+.carousel-title-card {
+  text-align: center;
+  padding: 32px 20px;
+}
+.carousel-title-logo {
+  font-size: 2rem;
+  font-weight: 800;
+  color: #fff;
+  font-family: 'JetBrains Mono', monospace;
+  margin-bottom: 12px;
+}
+.carousel-title-headline {
+  font-size: 1.8rem;
+  font-weight: 800;
+  color: #fff;
+  margin-bottom: 8px;
+}
+.carousel-title-sub {
+  font-size: 1.1rem;
+  color: #888;
+  margin-bottom: 32px;
+}
+.carousel-title-stats {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 32px;
+  margin-bottom: 28px;
+}
+.carousel-stat {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+}
+.carousel-stat-label {
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: #666;
+}
+.carousel-stat-val {
+  font-size: 1.8rem;
+  font-weight: 800;
+  font-family: 'JetBrains Mono', monospace;
+}
+.carousel-stat-bad { color: #ff6b6b; }
+.carousel-stat-good { color: #00e5a0; }
+.carousel-stat-desc { font-size: 0.85rem; color: #888; }
+.carousel-stat-arrow {
+  font-size: 2rem;
+  color: #00e5a0;
+  font-weight: 700;
+}
+.carousel-title-tagline {
+  font-size: 1rem;
+  color: #ccc;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+}
+
+/* Slide 2-4: Split Layout */
+.carousel-split {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+  align-items: start;
+}
+.carousel-pane-label {
+  font-size: 0.7rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: #00e5a0;
+  margin-bottom: 10px;
+  padding-left: 4px;
+}
+.carousel-pre {
+  margin: 0;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.78rem;
+  line-height: 1.65;
+  color: #ccc;
+  white-space: pre;
+  overflow-x: auto;
+}
+.carousel-output-line {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.8rem;
+  line-height: 1.7;
+  color: #ccc;
+}
+.carousel-output-dim { color: #888; }
+.carousel-output-spacer { height: 8px; }
+
+/* Slide 5: Results Card */
+.carousel-results-card {
+  text-align: center;
+  padding: 20px;
+}
+.carousel-results-title {
+  font-size: 1.8rem;
+  font-weight: 800;
+  color: #fff;
+  margin-bottom: 24px;
+}
+.carousel-results-stats {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  align-items: center;
+  margin-bottom: 24px;
+}
+.carousel-result-item {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.95rem;
+  color: #ccc;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.carousel-results-divider {
+  height: 1px;
+  background: rgba(255,255,255,0.08);
+  margin: 20px auto;
+  max-width: 400px;
+}
+.carousel-results-compat { margin-bottom: 8px; }
+.carousel-results-compat h4 {
+  color: #fff;
+  font-size: 1rem;
+  margin-bottom: 12px;
+}
+.carousel-compat-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  justify-content: center;
+}
+.carousel-tag {
+  display: inline-block;
+  padding: 5px 14px;
+  border-radius: 20px;
+  font-size: 0.8rem;
+  font-weight: 500;
+  background: rgba(0,229,160,0.08);
+  color: #00e5a0;
+  border: 1px solid rgba(0,229,160,0.15);
+}
+.carousel-results-cta { margin-top: 8px; }
+.carousel-results-cta .code-block {
+  max-width: 400px;
+  margin: 0 auto 16px;
+}
+.carousel-cta-links {
+  display: flex;
+  gap: 24px;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+.carousel-cta-link {
+  font-size: 0.9rem;
+  color: #888;
+  transition: color 0.2s;
+}
+.carousel-cta-link:hover { color: #00e5a0; }
+
+/* Carousel Navigation Arrows */
+.carousel-arrow {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 10;
+  background: rgba(0,229,160,0.1);
+  border: 1px solid rgba(0,229,160,0.25);
+  color: #00e5a0;
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+.carousel-arrow:hover {
+  background: rgba(0,229,160,0.2);
+  border-color: rgba(0,229,160,0.4);
+  transform: translateY(-50%) scale(1.08);
+}
+.carousel-arrow-prev { left: 12px; }
+.carousel-arrow-next { right: 12px; }
+
+/* Carousel Dots */
+.carousel-dots {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  padding: 20px 0 24px;
+}
+.carousel-dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  border: 2px solid rgba(0,229,160,0.3);
+  background: transparent;
+  cursor: pointer;
+  transition: all 0.3s;
+  padding: 0;
+}
+.carousel-dot:hover { border-color: rgba(0,229,160,0.6); }
+.carousel-dot-active {
+  background: #00e5a0;
+  border-color: #00e5a0;
+  transform: scale(1.2);
+}
+
+/* Carousel Responsive */
+@media (max-width: 768px) {
+  .carousel-slide { padding: 24px 16px; }
+  .carousel-split { grid-template-columns: 1fr; }
+  .carousel-title-stats { flex-direction: column; gap: 16px; }
+  .carousel-stat-arrow { transform: rotate(90deg); }
+  .carousel-title-headline { font-size: 1.4rem; }
+  .carousel-title-logo { font-size: 1.5rem; }
+  .carousel-arrow { width: 36px; height: 36px; }
+  .carousel-arrow-prev { left: 6px; }
+  .carousel-arrow-next { right: 6px; }
+  .carousel-pre { font-size: 0.68rem; }
+  .carousel-output-line { font-size: 0.72rem; }
+  .carousel-results-title { font-size: 1.4rem; }
+  .carousel-result-item { font-size: 0.82rem; }
 }
 
 /* Prism overrides for dark theme */

@@ -134,6 +134,105 @@ document.querySelectorAll('a[href^="#"]').forEach(a => {
   });
 });
 
+// ─── Testing Carousel ────────────────────────────────────
+(function() {
+  const carousel = document.querySelector('.carousel');
+  if (!carousel) return;
+
+  const track = carousel.querySelector('.carousel-track');
+  const slides = carousel.querySelectorAll('.carousel-slide');
+  const dots = carousel.querySelectorAll('.carousel-dot');
+  const prevBtn = carousel.querySelector('.carousel-arrow-prev');
+  const nextBtn = carousel.querySelector('.carousel-arrow-next');
+  const totalSlides = slides.length;
+  let current = 0;
+  let autoplayTimer = null;
+  const AUTOPLAY_DELAY = 6000;
+
+  function goToSlide(index) {
+    if (index < 0) index = totalSlides - 1;
+    if (index >= totalSlides) index = 0;
+
+    // Remove active from current
+    slides[current].classList.remove('carousel-slide-active');
+    dots[current].classList.remove('carousel-dot-active');
+
+    current = index;
+
+    // Move track
+    track.style.transform = `translateX(-${current * 100}%)`;
+
+    // Add active to new
+    slides[current].classList.add('carousel-slide-active');
+    dots[current].classList.add('carousel-dot-active');
+  }
+
+  function nextSlide() { goToSlide(current + 1); }
+  function prevSlide() { goToSlide(current - 1); }
+
+  // Arrow buttons
+  nextBtn.addEventListener('click', () => { nextSlide(); resetAutoplay(); });
+  prevBtn.addEventListener('click', () => { prevSlide(); resetAutoplay(); });
+
+  // Dot buttons
+  dots.forEach(dot => {
+    dot.addEventListener('click', () => {
+      goToSlide(parseInt(dot.dataset.slide));
+      resetAutoplay();
+    });
+  });
+
+  // Keyboard navigation
+  carousel.setAttribute('tabindex', '0');
+  carousel.addEventListener('keydown', (e) => {
+    if (e.key === 'ArrowRight') { nextSlide(); resetAutoplay(); }
+    if (e.key === 'ArrowLeft') { prevSlide(); resetAutoplay(); }
+  });
+
+  // Autoplay
+  function startAutoplay() {
+    autoplayTimer = setInterval(nextSlide, AUTOPLAY_DELAY);
+  }
+  function resetAutoplay() {
+    clearInterval(autoplayTimer);
+    startAutoplay();
+  }
+
+  // Pause on hover
+  carousel.addEventListener('mouseenter', () => clearInterval(autoplayTimer));
+  carousel.addEventListener('mouseleave', () => startAutoplay());
+
+  // Start autoplay when carousel scrolls into view
+  ScrollTrigger.create({
+    trigger: carousel,
+    start: 'top 80%',
+    once: true,
+    onEnter: () => startAutoplay()
+  });
+
+  // GSAP entrance animation
+  gsap.from(carousel, {
+    scrollTrigger: { trigger: carousel, start: 'top 85%', once: true },
+    opacity: 0, y: 50, duration: 0.7, ease: 'power2.out'
+  });
+
+  // Touch/swipe support
+  let touchStartX = 0;
+  let touchEndX = 0;
+  carousel.addEventListener('touchstart', (e) => {
+    touchStartX = e.changedTouches[0].screenX;
+  }, { passive: true });
+  carousel.addEventListener('touchend', (e) => {
+    touchEndX = e.changedTouches[0].screenX;
+    const diff = touchStartX - touchEndX;
+    if (Math.abs(diff) > 50) {
+      if (diff > 0) nextSlide();
+      else prevSlide();
+      resetAutoplay();
+    }
+  }, { passive: true });
+})();
+
 // ─── Global Language Toggle (JS / Python) ────────────────
 (function() {
   // Python equivalents for every code block on the page
